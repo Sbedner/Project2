@@ -57,27 +57,20 @@ router.post('/register', function (req, res) {
                 bcrypt.hash(somePassword, salt, (err, hash) => {
                     if(err) throw err;
                     somePassword = hash; 
-                    console.log(somePassword);//***this works to here
+                    console.log("within function " + somePassword);
+                    db.User.create({
+                        name: req.body.name,
+                        username: req.body.name,
+                        email: req.body.email,
+                        password: somePassword
+                    }).then(function(dbUser){
                 })
             });
-        
-        } 
-
+        });
+    };
         createPassword(somePassword);
-        console.log(somePassword);//***does not make it here
+        console.log("after function called " + somePassword);
 
-        // // create user in DB  --- this code writes user data to DB table
-            db.User.create({
-                name: req.body.name,
-                username: req.body.name,
-                email: req.body.email,
-                password: somePassword
-            }).then(function(dbUser){
-
-                //res.json(dbUser); 
-            });
-        
-    
         //  Msg to post on login page:
         req.flash('success_msg', 'You are registered and can now login');
         
