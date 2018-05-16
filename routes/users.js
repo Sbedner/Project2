@@ -73,7 +73,8 @@ router.post('/register', function (req, res) {
                 email: req.body.email,
                 password: somePassword
             }).then(function(dbUser){
-                res.json(dbUser); 
+
+                //res.json(dbUser); 
             });
         
     
